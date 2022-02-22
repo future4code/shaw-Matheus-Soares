@@ -145,8 +145,7 @@ function filmes(objeto1, objeto2){
 
 
 //desafio 3
-array = [];
-carrinho = array;
+carrinho = [];
 fruta1 = {
     nome: 'morango',
     disponibilidade: true
@@ -160,13 +159,12 @@ fruta3 = {
     disponibilidade: true
 };
 function compras(fruta){
-    array.push(fruta);
-    carrinho = array;
-    return carrinho;
+    carrinho.push(fruta);
 };
 compras(fruta1);
 compras(fruta2);
-console.log(compras(fruta3));
+compras(fruta3);
+console.log(carrinho);
 
 function inverte(fruta){
     fruta.disponibilidade = !fruta.disponibilidade;
