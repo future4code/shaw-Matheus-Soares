@@ -98,3 +98,22 @@ console.log(compreYpe);
 */
 
 
+//desafio 1
+const pokemons = [
+    { nome: "Bulbasaur", tipo: "grama" },
+    { nome: "Bellsprout", tipo: "grama" },
+    { nome: "Charmander", tipo: "fogo" },
+    { nome: "Vulpix", tipo: "fogo" },
+    { nome: "Squirtle", tipo: "água" },
+    { nome: "Psyduck", tipo: "água" },
+]
+/*a
+pokemons.sort(function (a, b) {
+    return novoObj = (a.nome > b.nome) ? 1 : ((b.nome > a.nome) ? -1 : 0)
+})
+let arrayNomes = []
+for(let i = 0;i<pokemons.length;i++){
+    arrayNomes[i] = [pokemons[i].nome]
+}
+console.log(arrayNomes)
+*/
