@@ -119,22 +119,16 @@ console.log(arrayNomes)
 */
 //b
 let arrayTipos = ['']
-console.log(arrayTipos.length);
 let temp = 0
-for(let i = 0;i<pokemons.length;i++){//2
-    console.log('entrou no primeiro for');
+for(let i = 0;i<pokemons.length;i++){
     for(let t = 0;t<=arrayTipos.length;t++){
-        console.log('entrou no segundo for');
-        if(arrayTipos[t]===pokemons[i].tipo){//nao vai entrar no primeiro ciclo,
-            console.log('entrou no primeiro if');
+        if(arrayTipos[t]===pokemons[i].tipo){
             break;
         }
         if(t===temp){
-            console.log('entrou no segundo if');
-            if(arrayTipos[t]!==pokemons[i].tipo){//tem que entrar no primeiro ciclo,
-                console.log('entrou no terceiro if');
+            if(arrayTipos[t]!==pokemons[i].tipo){
                 arrayTipos[temp] = pokemons[i].tipo;
-                temp++;//1
+                temp++;
                 break;
             }
         }
