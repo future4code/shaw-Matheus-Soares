@@ -44,6 +44,7 @@ div img {
     border-radius: 5px;
     font-size: 20px;
     color: white;
+    margin-top: 100px;
 }
 
 .botao-amarelo:hover {
@@ -56,8 +57,10 @@ div img {
     text-align: center;
 }
 
-.icone {
-    height: 15px;
+#icone {
+    background-color: white;
+    width: 2%;
+    height: 2%;
 }
 
 
@@ -132,4 +135,10 @@ td button {
 
 .texto-da-tabela{
     text-align: center;
+    margin: auto auto;
+}
+
+.img{
+    width: 50px;
+    height: 50px;
 }
