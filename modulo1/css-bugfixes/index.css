@@ -134,6 +134,11 @@ td button {
     color: black;
 }
 
+.botao-voltar{
+    margin-top: 150px;
+    text-align: center;
+}
+
 #back-button:hover {
     background-color: #635a3d
 }
