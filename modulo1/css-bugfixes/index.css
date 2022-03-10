@@ -118,6 +118,13 @@ td button {
     height: 100px;
 }
 
+.caixa-de-pesquisa{
+    border-top: white;
+    border-left: white;
+    border-right: white;
+    border-bottom-color: black;
+    border-bottom-width: 3px;
+}
 
 #back-button {
     background-color: white;
