@@ -7,6 +7,7 @@
 * {
     margin: 0;
     padding: 0;
+    font-family: 'Roboto', sans-serif;
 }
 
 h2 {
@@ -119,11 +120,8 @@ td button {
 }
 
 .caixa-de-pesquisa{
-    border-top: white;
-    border-left: white;
-    border-right: white;
-    border-bottom-color: black;
-    border-bottom-width: 3px;
+    border: none;
+    border-bottom: solid 3px;
 }
 
 #back-button {
