@@ -1,0 +1,52 @@
+.cabecalho{
+    background-color: antiquewhite;
+    margin: 10px 5px 10px 5px;
+}
+
+.paginas{
+    font-size: 20px;
+    color: white;
+    padding: 2px;
+    margin-right: 80px;
+    text-decoration: none;
+    background-color: rgb(18, 18, 18);
+}
+
+#insta{
+    width: 25%;
+    height: 25%;
+    margin: 30px;
+    margin-bottom: 100px;
+}
+
+.fundo{
+    background-color: rgb(22, 21, 21);
+    color: white;
+}
+
+.titulo{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+#lorem{
+    margin-left: 100px;
+    margin-bottom: 100px;
+}
+
+.icons{
+    margin-top: 300px;
+    width: 200px;
+    height: 200px;
+}
+
+.produtos{
+    width: 200px;
+    height: 200px;
+}
+
+#rendezvous{
+    margin-top: 50px;
+    margin-bottom: 50px;
+    font-size: 50px;
+}
