@@ -1,0 +1,90 @@
+.cabecalho{
+    /* position: sticky; */
+    background-color: midnightblue;
+    border-radius: 100px;
+    font-size: 30px;
+    padding: 0.5%;
+    display: flex;
+    justify-content: space-around;
+}
+
+#botao{
+    color: rgb(224, 214, 214);
+    text-decoration: none;
+}
+
+#botao:hover{
+    transition: transform 1500ms;
+    background-color: white;
+    border-radius: 100px;
+    color: black;
+    transform: scale(1.2);
+}
+
+.logos{
+    text-align: center;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: space-around;
+    margin: 70px;
+    margin-top: 200px;
+}
+
+html{
+    box-sizing: border-box;
+    background-image: url("/img/1567666.webp");
+    background-repeat: repeat-y;
+    background-size: 110%;
+}
+
+*{
+    font-family: 'Roboto', sans-serif;
+}
+
+#sobremim{
+    text-align: center;
+    background-color: white;
+    border-radius: 50px;
+    padding: 15px;
+}
+
+#foto{
+    float: left;
+    padding: 5px;
+}
+
+#projetos-lista{
+    background-color: white;
+    text-align: center;
+    border-radius: 50px;
+
+}
+
+#habilidades{
+    text-align: center;
+    background-color: white;
+    height: 150px;
+    border-radius: 50px;
+    padding: 15px;
+}
+
+#contato{
+    text-align: center;
+    background-color: white;
+    border-radius: 50px;
+    padding: 15px;
+}
+
+#instituicoes{
+    margin-top: 30px;
+    text-align: center;
+    background-color: white;
+    border-radius: 50px;
+    padding: 15px;
+}
+
+table{
+    margin-top: 100px;
+    border-spacing: 10px;
+}
