@@ -1,4 +1,15 @@
 header{
+    margin: 0;
+    height: 100%;
+    /* display: flex;
+    justify-content: left;
+    align-items: center;
+    justify-content: space-between; */
     background-color: orange;
-    height: 100px;
 }
+
+body{
+    display: grid;
+    grid-template-rows: 100px 1fr 60px;
+}
+
