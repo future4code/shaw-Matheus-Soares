@@ -10,6 +10,7 @@ header{
 
 footer{
     margin-bottom: 0;
+    margin-top: 20px;
     bottom: 0;
     height: 100%;
     background-color: rgb(36, 36, 36);
@@ -21,7 +22,7 @@ footer{
 
 body{
     display: grid;
-    grid-template-rows: 100px 1fr 60px;
+    grid-template-rows: 100px 100% 60px;
 }
 
 .videoplayer{/*classe da pagina de player*/
@@ -67,13 +68,10 @@ p{
 
 .conteudo{
     display: grid;
-    /* grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr; */
     grid-template-columns: repeat(auto-fill, minmax(40vh, 1fr));
-    grid-template-rows: auto-fill;
+    /* grid-template-rows: auto-fill; */
     margin: 1%;
-    row-gap: 3%;
-    column-gap: 1%;
+    gap: 10px;
 }
 
 #img{
