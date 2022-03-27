@@ -2,13 +2,16 @@ import React from 'react';
 import styled from 'styled-components'
 
 const Main = styled.main`
-  display: grid;
-  grid-template-rows: 50px, 1vh, 150px;
-  grid-template-columns: 1fr, 1fr;
+  /* display: grid;
+  grid-template-rows: 50px, 1fr, 150px; */
 `
 
-const Input = styled.input`
+const Mensagem = styled.input`
   width: 80%;
+  bottom: 0;
+`
+const Remetente = styled.input`
+  width: 20%;
   bottom: 0;
 `
 
@@ -35,12 +38,16 @@ class App extends React.Component{
     pessoas: [
       {
         nomeDestin: 'Desconhecido'
+      },
+      {
+        mensagem: ''
       }
     ],
-    valorInputNomeDestin: ''
+    valorInputNomeDestin: '',
+    valorInputMensagem: ''
   }
 
-  enviaMensagem = () => {
+  mudarNome = () => {
     const nome = {
       nomeDestin: this.state.valorInputNomeDestin
     }
@@ -49,26 +56,54 @@ class App extends React.Component{
     this.setState({valorInputNomeDestin: ''})
   }
 
+  enviarMensagem = () => {
+    const mensagem = {
+      msg: this.state.valorInputMensagem
+    }
+    const mensagem2 = [...this.state.pessoas, mensagem]
+    this.setState({pessoas: mensagem2})
+    this.setState({valorInputMensagem: ''})
+  }
+
   onChangeInputNomeDestin = (event) => {
     this.setState({valorInputNomeDestin: event.target.value})
   }
 
+  onChangeInputMensagem = (event) => {
+    this.setState({valorInputMensagem: event.target.value})
+  }
+
   render() {
+    const Conversa = this.state.pessoas.map((pessoa) => {
+      return(
+        <Header>
+          <p
+            nomeDestin={pessoa.nomeDestin}
+            mensagem={pessoa.mensagem}
+          />
+        </Header>
+      )
+    })
     return(
       <Main>
-        <Header>
-          
-        </Header>
+        <div>
+          {Conversa}
+        </div>
         <div>
 
         </div>
         <Footer>
-          <Input
+          <Remetente
             value={this.state.valorInputNomeDestin}
             onChange={this.onChangeInputNomeDestin}
+            placeholder={'Nome do Remetente'}
+          />
+          <Mensagem
+            value={this.state.valorInputMensagem}
+            onChange={this.onChangeInputMensagem}
             placeholder={'Mensagem'}
           />
-          <button onClick={this.enviaMensagem} >Enviar</button>
+          <button onClick={this.enviarMensagem} >Enviar</button>
         </Footer>
       </Main>
     )
