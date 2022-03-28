@@ -37,9 +37,7 @@ class App extends React.Component{
   state={
     pessoas: [
       {
-        nomeDestin: 'Desconhecido'
-      },
-      {
+        nomeDestin: 'Desconhecido',
         mensagem: ''
       }
     ],
