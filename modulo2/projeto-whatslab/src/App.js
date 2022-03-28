@@ -47,6 +47,11 @@ class App extends React.Component{
     valorInputMensagem: ''
   }
 
+  acionarFuncoes = () => {
+    this.mudarNome()
+    this.enviarMensagem()
+  }
+
   mudarNome = () => {
     const nome = {
       nomeDestin: this.state.valorInputNomeDestin
@@ -77,10 +82,7 @@ class App extends React.Component{
     const Conversa = this.state.pessoas.map((pessoa) => {
       return(
         <Header>
-          <p
-            nomeDestin={pessoa.nomeDestin}
-            mensagem={pessoa.mensagem}
-          />
+          {pessoa.nomeDestin}: {pessoa.mensagem}
         </Header>
       )
     })
@@ -103,7 +105,7 @@ class App extends React.Component{
             onChange={this.onChangeInputMensagem}
             placeholder={'Mensagem'}
           />
-          <button onClick={this.enviarMensagem} >Enviar</button>
+          <button onClick={this.acionarFuncoes} >Enviar</button>
         </Footer>
       </Main>
     )
