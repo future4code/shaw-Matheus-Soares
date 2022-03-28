@@ -35,37 +35,18 @@ const Footer = styled.footer`
 
 class App extends React.Component{
   state={
-    pessoas: [
-      {
-        nomeDestin: 'Desconhecido',
-        mensagem: ''
-      }
-    ],
+    pessoas: [],
     valorInputNomeDestin: '',
     valorInputMensagem: ''
   }
 
-  acionarFuncoes = () => {
-    this.mudarNome()
-    this.enviarMensagem()
-  }
-
   mudarNome = () => {
-    const nome = {
-      nomeDestin: this.state.valorInputNomeDestin
+    const conteudo = {
+      valorInputNomeDestin: this.state.valorInputNomeDestin,
+      valorInputMensagem: this.state.valorInputMensagem
     }
-    const nome2 = [...this.state.pessoas, nome]
-    this.setState({pessoas: nome2})
-    this.setState({valorInputNomeDestin: ''})
-  }
-
-  enviarMensagem = () => {
-    const mensagem = {
-      msg: this.state.valorInputMensagem
-    }
-    const mensagem2 = [...this.state.pessoas, mensagem]
-    this.setState({pessoas: mensagem2})
-    this.setState({valorInputMensagem: ''})
+    const pessoasAtt = [...this.state.pessoas, conteudo]
+    this.setState({pessoas: pessoasAtt})
   }
 
   onChangeInputNomeDestin = (event) => {
@@ -76,11 +57,12 @@ class App extends React.Component{
     this.setState({valorInputMensagem: event.target.value})
   }
 
+  
   render() {
     const Conversa = this.state.pessoas.map((pessoa) => {
       return(
         <Header>
-          {pessoa.nomeDestin}: {pessoa.mensagem}
+          {pessoa.valorInputNomeDestin}: {pessoa.valorInputMensagem}
         </Header>
       )
     })
@@ -103,7 +85,7 @@ class App extends React.Component{
             onChange={this.onChangeInputMensagem}
             placeholder={'Mensagem'}
           />
-          <button onClick={this.acionarFuncoes} >Enviar</button>
+          <button onClick={this.mudarNome} >Enviar</button>
         </Footer>
       </Main>
     )
