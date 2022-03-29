@@ -4,34 +4,51 @@ import styled from "styled-components";
 const Main = styled.div`
   text-align: center;
 `
+const Button = styled.button`
+  margin-left: 10px;
+`
+const Select = styled.select`
+  margin-left: 10px;
+`
 
 export default class App extends React.Component {
   state = {
     tarefa: '',
-    inputTarefa: ''
+    inputTarefa: '',
+    filtro: ''
   }
 
   onChangeInputTarefa = (event) => {
-    this.setState({inputTarefa: event.target.value})
+    this.setState({ inputTarefa: event.target.value })
   }
 
   listaDeTarefas = () => {
-    <>
-      <h2>Lista de tarefas</h2>
-      <input
-        value={this.state.inputTarefa}
-        onChange={this.onChangeInputTarefa}
-      />
-    </>
+    return (
+      <>
+        <h1>Lista de tarefas</h1>
+        <input
+          value={this.state.inputTarefa}
+          onChange={this.onChangeInputTarefa}
+        />
+        <Button>Adicionar</Button>
+        <p>Filtro
+          <Select>
+            <option>Nenhum</option>
+            <option>Pendentes</option>
+            <option>Completas</option>
+          </Select>
+        </p>
+      </>
+    )
   }
 
-      render(){
+  render() {
     return (
-        <Main>
-          <div>
-            {this.listaDeTarefas()}
-          </div>
-        </Main>
-      )
+      <Main>
+        <div>
+          {this.listaDeTarefas()}
+        </div>
+      </Main>
+    )
   }
 }
