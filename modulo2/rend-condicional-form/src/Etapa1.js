@@ -26,7 +26,7 @@ export default class Etapa1 extends React.Component {
     render() {
         return (
             <>
-                <h1>ETAPA 1 - DADOS GERAIS</h1>
+                <h2>ETAPA 1 - DADOS GERAIS</h2>
                 <p>1. Qual o seu nome?</p>
                 <input
                     value={this.state.info.nome}
@@ -42,6 +42,13 @@ export default class Etapa1 extends React.Component {
                     value={this.state.info.email}
                     onChange={this.onChangeInputEmail}
                 />
+                <p>4. Qual a sua escolaridade?</p>
+                <select>
+                    <option>Ensino médio incompleto</option>
+                    <option>Ensino médio completo</option>
+                    <option>Ensino superior incompleto</option>
+                    <option>Ensino superior completo</option>
+                </select>
             </>
         )
     }
