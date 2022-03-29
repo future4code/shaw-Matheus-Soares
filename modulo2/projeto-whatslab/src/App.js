@@ -47,6 +47,8 @@ class App extends React.Component{
     }
     const pessoasAtt = [...this.state.pessoas, conteudo]
     this.setState({pessoas: pessoasAtt})
+    this.setState({valorInputMensagem:''})
+    this.setState({valorInputNomeDestin:''})
   }
 
   onChangeInputNomeDestin = (event) => {
