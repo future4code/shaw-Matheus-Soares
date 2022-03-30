@@ -14,12 +14,27 @@ const Botao = styled.button`
   border-style: none;
   background-color: white;
 `
+const Li = styled.li`
+  text-decoration: ${({completa}) => (completa ? "Line-through" : "none")};
+`
 
 export default class App extends React.Component {
   state = {
       tarefas: [],
       inputTarefa: '',
       filtro: ''
+  }
+
+  componentDidUpdate(){
+    const tarefas = this.state.tarefas;
+    localStorage.setItem("tarefas", JSON.stringify(tarefas))
+  }
+  componentDidMount() {
+    if(localStorage.getItem("tarefas")){
+      const tarefasLS = localStorage.getItem("tarefas")
+      const tarefasObjetos = JSON.parse(tarefasLS)
+      this.setState({tarefas: tarefasObjetos})
+    }
   }
 
   adicionaTarefa = () => {
@@ -33,14 +48,11 @@ export default class App extends React.Component {
     this.setState({ inputTarefa: '' })
   }
 
-  riscar = () => {
-    return (
-      this.setState({completa: true })
-    )
-  }
-
   onChangeInputTarefa = (event) => {
     this.setState({ inputTarefa: event.target.value })
+  }
+  onChangeFilter = (event) => {
+    this.setState({filtro: event.target.value})
   }
 
   funcaoPrincipal = () => {
@@ -53,30 +65,45 @@ export default class App extends React.Component {
         />
         <Button onClick={this.adicionaTarefa}>Adicionar</Button>
         <p>Filtro
-          <Select>
-            <option>Nenhum</option>
-            <option>Pendentes</option>
-            <option>Completas</option>
+          <Select value={this.state.filtro} onChange={this.onChangeFilter}>
+            <option value={''}>Nenhum</option>
+            <option value={'pendentes'}>Pendentes</option>
+            <option value={'completas'}>Completas</option>
           </Select>
         </p>
       </>
     )
   }
 
-  renderizar = (id, tarefa) => {
-    if (id===tarefa.id){
-      console.log('entrou no if');
-      return <Botao onClick={this.riscar}>{tarefa.inputTarefa}</Botao>
-    }
-    return <Botao onClick={this.riscar}><s>{tarefa.inputTarefa}</s></Botao>
+  riscar = (id) => {
+    const novaLista = this.state.tarefas.map((tarefa) => {
+      if(tarefa.id=== id){
+        return {
+          ...tarefa,
+          completa: !tarefa.completa
+        }
+      }
+      return tarefa;
+    })
+    this.setState({tarefas: novaLista})
   }
 
   render() {
-    const ListaDeTarefas = this.state.tarefas.map((tarefa) => {
+    const listaFiltrada = this.state.tarefas.filter((tarefa) => {
+      switch (this.state.filtro) {
+        case "pendentes":
+          return !tarefa.completa
+        case "completas":
+          return tarefa.completa
+        default:
+          return true
+      }
+    })
+    const ListaDeTarefas = listaFiltrada.map((tarefa) => {
       return (
-        <li>
-          <Botao onClick={this.renderizar(tarefa.id, tarefa)}>{tarefa.texto}</Botao>.
-        </li>
+        <Li completa={tarefa.completa} onClick={()=>this.riscar(tarefa.id)}>
+          {tarefa.texto}
+        </Li>
       )
     })
     return (
