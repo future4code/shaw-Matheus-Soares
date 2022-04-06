@@ -1,7 +1,6 @@
 import React from "react";
 import axios from "axios";
 import styled from "styled-components"
-import MoreInfo from "./MoreInfo";
 
 const CardUsuario = styled.div`
     border: 1px solid black;
