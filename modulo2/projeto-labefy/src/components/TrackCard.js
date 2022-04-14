@@ -32,10 +32,14 @@ export default class TrackCard extends React.Component {
             <div>
                 <TrackContainer>{this.props.trackName}</TrackContainer>
                 <ArtistContainer>{this.props.artist}</ArtistContainer>
-                <DeleteButton>X</DeleteButton>
+                <DeleteButton
+                    onClick={()=>this.props.deleteTrack(this.props.trackId)}
+                >
+                    X
+                </DeleteButton>
             </div>
             <audio controls="controls">
-                <source src={this.props.url} type="audio/ogg"/>
+                <source src={this.props.url} type="audio/ogg" />
             </audio>
         </TrackCardContainer>)
     }

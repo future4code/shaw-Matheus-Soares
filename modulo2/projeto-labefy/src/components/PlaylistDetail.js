@@ -1,5 +1,7 @@
+import axios from "axios"
 import React from "react"
 import styled from "styled-components"
+import { BASE_URL, Headers } from "./consts"
 import TrackCard from "./TrackCard"
 
 const PlaylistDetailContainer = styled.div`
@@ -23,20 +25,45 @@ const TrackCreationForm = styled.form`
 
 class PlaylistDetail extends React.Component {
     state = {
-        tracks: [
-            {
-                "id": "ff3f2087-5aeb-4418-87ce-a210dd66506d",
-                "name": "Dirty Paws",
-                "artist": "Of monsters and men",
-                "url": "https://open.spotify.com/track/5g7rJvWYVrloJZwKiShqlS?si=bcda39f399364d02"
-            },
-            {
-                "id": "746c1e8f-9920-4b90-8eb3-aacaaa617e4b",
-                "name": "King And Lionheart",
-                "artist": "Of monsters and men",
-                "url": "https://open.spotify.com/track/310d8Vawp5kYDYrGrrTAzl?si=fdd1f544e90c4875"
-            }
-        ]
+        tracks: [],
+        trackName: "",
+        artist: "",
+        url: ""
+    }
+
+    componentDidMount = () => {
+        this.getTracks()
+    }
+
+    getTracks = () => {
+        axios
+        .get(`${BASE_URL}/${this.props.playlistId}/tracks`, Headers)
+        .then((res) => this.setState({tracks: res.data.result.tracks}))
+        .catch((err) => console.log(err.response))
+    }
+    deleteTrack = (trackId) => {
+        axios
+        .delete(`${BASE_URL}/${this.props.playlistId}/tracks/${trackId}`, Headers)
+        .then(() => this.getTracks())
+        .catch((err) => console.log(err.response))
+    }
+
+    onChangeInputValue = (event) => {
+        this.setState({[event.target.name]: event.target.value})
+    }
+
+    addTrack = (e) => {
+        e.preventDefault()
+        const body ={
+            name: this.state.trackName,
+            artist: this.state.artist,
+            url: this.state.url
+        }
+
+        axios
+        .post(`${BASE_URL}/${this.props.playlistId}/tracks`, body, Headers)
+        .then(() => {this.getTracks();this.setState({trackName:"",artist:"",url:""})})
+        .catch((err) => console.log(err.response))
     }
 
     render() {
@@ -46,27 +73,44 @@ class PlaylistDetail extends React.Component {
                 trackName={track.name}
                 artist={track.artist}
                 url={track.url}
+                trackId={track.id}
+                deleteTrack={this.deleteTrack}
             />
         })
 
         return (<PlaylistDetailContainer>
-            <TrackCreationForm>
+            <TrackCreationForm onSubmit={this.addTrack}>
                 <div>
                     <label>Nome da música</label>
-                    <input />
+                    <input
+                        placeholder="nome da música"
+                        name="trackName"
+                        value={this.state.trackName}
+                        onChange={this.onChangeInputValue}
+                    />
                 </div>
                 <div>
                     <label>Artista</label>
-                    <input />
+                    <input
+                        placeholder="nome do artista"
+                        name="artist"
+                        value={this.state.artist}
+                        onChange={this.onChangeInputValue}
+                    />
                 </div>
                 <div>
                     <label>URL da música</label>
-                    <input />
+                    <input
+                        placeholder="url da música"
+                        name="url"
+                        value={this.state.url}
+                        onChange={this.onChangeInputValue}
+                    />
                 </div>
                 <button type="submit" >Adicionar música</button>
             </TrackCreationForm>
             {tracks}
-            <button onClick={this.props.goToPlaylists} >Voltar para playlists</button>
+            <button onClick={() => this.props.goToPlaylists("")} >Voltar para playlists</button>
         </PlaylistDetailContainer>)
     }
 }

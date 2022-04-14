@@ -1,5 +1,7 @@
+import axios from "axios"
 import React from "react"
 import styled from "styled-components"
+import { BASE_URL, Headers } from "./consts"
 import PlaylistCard from "./PlaylistCard"
 
 const PlaylistsContainer = styled.div`
@@ -10,29 +12,35 @@ const PlaylistsContainer = styled.div`
 
 class Playlists extends React.Component {
     state = {
-        playlists: 
-        [
-            {
-                "id": "752cfc7d-029e-4da0-9ee3-a9ca032e6df3",
-                "name": "Of-monster-and-men"
-            },
-            {
-                "id": "36bd0f7c-48ec-41c4-8ca3-7171e62d2f19",
-                "name": "Artic-monkeys"
-            },
-            {
-                "id": "daec143c-3c64-4ede-bbc2-139ef0ab8656",
-                "name": "Red-Hot-Chili-Peppers"
-            }
-        ]
+        playlists: []
+    }
+
+    componentDidMount = () => {
+        this.getPlaylists()
+    }
+
+    getPlaylists = () => {
+        axios
+        .get(BASE_URL, Headers)
+        .then((res) => this.setState({playlists: res.data.result.list}))
+        .catch((err) => console.log(err.response))
+    }
+
+    deletePlaylist = (playlistId) => {
+        axios
+        .delete(`${BASE_URL}/${playlistId}`, Headers)
+        .then((res) => this.getPlaylists())
+        .catch((err) => console.log(err.response))
     }
 
     render() {
         const playlists = this.state.playlists.map((playlist) => {
             return <PlaylistCard
                 key={playlist.id}
-                onChange={this.props.goToPlaylistDetail}
+                changePage={this.props.goToPlaylistDetail}
                 name={playlist.name}
+                playlistId={playlist.id}
+                deletePlaylist={this.deletePlaylist}
             />
         })
         return (<PlaylistsContainer>

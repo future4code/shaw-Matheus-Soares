@@ -9,22 +9,23 @@ const PlaylistManagerPageContainer = styled.div`
 
 class PlaylistManagerPage extends React.Component {
     state = {
-        currentPage: "playlists"
+        currentPage: "playlists",
+        playlistId: ""
     }
 
     goToPlaylists = () => {
-        this.setState({currentPage: "playlists"})
+        this.setState({ currentPage: "playlists" })
     }
-    goToPlaylistDetail = () => {
-        this.setState({currentPage: "details"})
+    goToPlaylistDetail = (playlistId) => {
+        this.setState({ currentPage: "details", playlistId: playlistId })
     }
 
     renderCurrentPage = () => {
-        switch (this.state.currentPage){
+        switch (this.state.currentPage) {
             case "playlists":
-                return <Playlists goToPlaylistDetail={this.goToPlaylistDetail}/>
+                return <Playlists goToPlaylistDetail={this.goToPlaylistDetail} />
             case "details":
-                return <PlaylistDetail goToPlaylists={this.goToPlaylists} />
+                return <PlaylistDetail goToPlaylists={this.goToPlaylists} playlistId={this.state.playlistId} />
         }
     }
 

@@ -18,9 +18,9 @@ const DeleteButton = styled.p`
 export default class PlaylistCard extends React.Component{
     render(){
         return (<PlaylistCardContainer>
-            <button onClick={this.props.onChange}>Abrir Playlist</button>
+            <button onClick={() => this.props.changePage(this.props.playlistId)}>Abrir Playlist</button>
             <NameContainer>{this.props.name}</NameContainer>
-            <DeleteButton>X</DeleteButton>
+            <DeleteButton onClick={() => this.props.deletePlaylist(this.props.playlistId)}>X</DeleteButton>
         </PlaylistCardContainer>)
     }
 }
