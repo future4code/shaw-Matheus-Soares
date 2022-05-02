@@ -1,3 +1,7 @@
 export default function CreateTripPage () {
-    return
+    return (
+        <div>
+            CreateTripPage
+        </div>
+    )
 }
