@@ -3,11 +3,6 @@ type Clients = {
     saldoTotal: number,
     debitos: number[]
 }
-type NovoClient = {
-    cliente: string,
-    saldoTotal: number,
-    debitos: number
-}
 
 const clientes: Clients[] = [
 	{ cliente: "João", saldoTotal: 1000, debitos: [100, 200, 300] },
@@ -15,27 +10,17 @@ const clientes: Clients[] = [
 	{ cliente: "Pedro", saldoTotal: 10000, debitos: [5140, 6100, 100, 2000] },
 	{ cliente: "Luciano", saldoTotal: 100, debitos: [100, 200, 1700] },
 	{ cliente: "Artur", saldoTotal: 1800, debitos: [200, 300] },
-	{ cliente: "Soter", saldoTotal: 1200, debitos: [] }
+	{ cliente: "Soter", saldoTotal: 1200, debitos: [0] }
 ]
 
-function SaldoNegativo (algos: Clients[]){
-    // const debits: number[][] = algos.map(algo => algo.debitos)
-    let debits: string[]
-    let soma: number
-    let subtracao: number
-    let i: number = 0
-    for(let i =0;i<algos.length;i++){
-        soma = 0
-        for(let j=0;j<algos[i].debitos.length;j++){
-            soma = algos[i].debitos[j] + soma
-        }
-        subtracao = algos[i].saldoTotal - soma
-        if(subtracao<0){
-            debits[i] = algos[i].cliente
-            i++;
+function SaldoNegativo(){
+    let nome: string[];
+    for (const cliente of clientes) {
+        if(cliente.saldoTotal<cliente.debitos.reduce((a,b) => a+b)){
+            nome.push(cliente.cliente)
         }
     }
-    return debits
+    return nome
 }
 
-console.log(SaldoNegativo(clientes))
+console.log(SaldoNegativo())
