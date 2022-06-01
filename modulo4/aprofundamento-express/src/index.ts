@@ -12,6 +12,8 @@ app.get('/ping', (req, res) => {
     res.send('pong')
 })
 
+console.log("escreva seu nome: ")
+
 //exercicio 2
 
 type ToDo = {
