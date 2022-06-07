@@ -77,7 +77,7 @@ SELECT * FROM Actor WHERE gender = "female";
 /*b*/
 SELECT salary FROM Actor WHERE name = "tony ramos";
 /*c*/
-SELECT * FROM Actor WHERE gender = 'invalid';/*nao sei*/
+SELECT * FROM Actor WHERE gender = 'invalid';/*porque foi limitado para apenas 6 caracteres*/
 /*d*/
 SELECT id, name, salary FROM Actor WHERE salary<500000;
 /*e*/
