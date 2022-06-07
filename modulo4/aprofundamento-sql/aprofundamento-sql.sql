@@ -37,7 +37,7 @@ gender = 'male' WHERE id = '005';
 UPDATE Actor SET name = 'Renato Russo', salary = 40000, birth_date = '1960-03-27', 
 gender = 'male' WHERE id = '009';/*funciona, mas nada é adicionado*/
 
-SELECT * FROM Actor;
+SELECT * FROM Movie;
 
 /*exercicio3*/
 /*a*/
@@ -75,6 +75,8 @@ ALTER TABLE Movie ADD playing_limit_date DATE;
 /*b*/
 ALTER TABLE Movie CHANGE avaliacao avaliacao FLOAT;
 /*c*/
+UPDATE Movie SET playing_limit_date = '2022-06-10';
+UPDATE Movie SET playing_limit_date = '2021-05-08' WHERE id = '001' OR id = '002';
 /*d*/
 DELETE FROM Movie Where id = '004';
 UPDATE Movie SET sinopse = 'sinopse' WHERE id = '004';
