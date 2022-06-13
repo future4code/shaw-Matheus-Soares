@@ -4,7 +4,7 @@ import dotenv from 'dotenv'
 import createUser from './endpoints/createUser'
 import getUserById from './endpoints/getUserById'
 import editUser from './endpoints/editUser'
-import createTask from './endpoints/createTask'
+import {createTask} from './endpoints/createTask'
 
 dotenv.config()
 

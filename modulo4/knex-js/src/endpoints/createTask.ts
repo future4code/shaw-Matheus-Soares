@@ -3,19 +3,17 @@ import moment from "moment"
 import insertTask from "../data/insertTask"
 
 
-export default async function createTask(req: Request,res: Response){
+export const createTask = async (req: Request,res: Response) => {
     try {
-        // if(!req.body.title || !req.body.description || !req.body.deadline || !req.body.authorId){
-        //     res.status(400).send({message: '"title", "description", "deadline" e  "authorId" sao origatorios'})
-        //     return 
-        // }
+        if(!req.body.title || !req.body.description || !req.body.deadline || !req.body.authorId){
+            throw new Error('"title", "description", "deadline" e  "authorId" sao origatorios')
+        }
 
-        // const dateDiff: number = moment(req.body.deadline, 'DD/MM/YYYY').unix() - moment().unix()
+        const dateDiff: number = moment(req.body.deadline, 'DD/MM/YYYY').unix() - moment().unix()
 
-        // if(dateDiff <= 0){
-        //     res.status(400).send({message: "deadline tem que ser uma data futura!!"})
-        //     return
-        // }
+        if(dateDiff <= 0){
+            throw new Error("deadline tem que ser uma data futura!!")
+        }
 
         const id: string = Date.now() + Math.random().toString()
         await insertTask(
@@ -34,7 +32,7 @@ export default async function createTask(req: Request,res: Response){
 
         // responder à requisiçao ou encerrar (.end())
     } catch (error: any) {
-        res.status(400).send(error.message || error.sqlMessage)
+        res.status(400).send(error.sqlMessage || error.message)
     }
 }
 

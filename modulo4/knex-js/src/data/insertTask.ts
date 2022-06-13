@@ -1,12 +1,19 @@
 import { connection } from "..";
 
-export default async function insertTask(id: string, title: string, description: string, deadline: string, authorId: string){
-    await connection('to_do_list_tasks')
-    .insert({
-        id,
-        title,
-        description,
-        deadline,
-        authorId
-    })
+const insertTask = async (id: string, title: string, description: string, deadline: string, authorId: string) => {
+    try {
+        await connection('to_do_list_tasks')
+        .insert({
+            id,
+            title,
+            description,
+            deadline,
+            authorId
+        })
+        
+    } catch (error:any) {
+        console.log(error.sqlMessage || error.message)
+    }
 }
+
+export default insertTask;
