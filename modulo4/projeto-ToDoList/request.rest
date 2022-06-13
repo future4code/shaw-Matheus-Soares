@@ -1,0 +1,10 @@
+PUT http://localhost:3003/user
+content-type: application/json
+
+{
+    "name":"gabriel mina",
+    "nickname":"MinexPower",
+    "email":"mina@gmail.com" 
+}
+
+###
