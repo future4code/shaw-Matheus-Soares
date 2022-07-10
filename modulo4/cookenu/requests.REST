@@ -1,0 +1,108 @@
+# Cadastro de Usuário
+POST http://localhost:3003/signup
+Content-Type: application/json
+
+{
+    "name": "Murilo",
+    "email": "muhmuh@gmail.com",
+    "password": "123456",
+    "role": "admin"
+}
+
+###
+# Login de Usuário
+# @name login
+POST http://localhost:3003/login
+Content-Type: application/json
+
+{
+    "email": "muhmuh@gmail.com",
+    "password": "123456"
+}
+
+###
+@token = {{login.response.body.token}}
+# Pegar usuário logado
+GET http://localhost:3003/user/profile
+Content-Type: application/json
+Authorization: {{token}}
+
+###
+# Pegar um usuário por ID
+GET http://localhost:3003/user/6753b1d9-7879-4bd8-9a28-1ccc5c0fcb5e
+Content-Type: application/json
+Authorization: {{token}}
+
+###
+# Criar Receita
+POST http://localhost:3003/recipe
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+    "title": "Macarrão à bolonhesa",
+    "description": "Macarrão à bolonhesa, com molho de tomate e carne moída"
+}
+
+###
+# Pegar receita por ID
+GET http://localhost:3003/recipe/8b666941-6286-4d55-b784-934d220d5552
+Content-Type: application/json
+Authorization: {{token}}
+
+###
+
+# Seguir um usuário
+POST http://localhost:3003/user/follow
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+    "followed_id": "72a8cd27-e6e9-4123-a9a2-ac28d62fe9a1"
+}
+
+###
+
+# Deixar de seguir um usuário
+POST http://localhost:3003/user/unfollow
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+    "followed_id": "6753b1d9-7879-4bd8-9a28-1ccc5c0fcb5e"
+}
+
+###
+
+# Pegar Feed de um usuário com as receitas que ele seguiu
+GET http://localhost:3003/user/feed
+Content-Type: application/json
+Authorization: {{token}}
+
+
+###
+
+# Editar uma receita própria
+PUT http://localhost:3003/recipe/88159517-8e2b-4818-b2fc-431d258b495f
+Content-Type: application/json
+Authorization: {{token}}
+
+{
+    "title": "Pudim de leite condensado",
+    "description": "Pudim de leite condensado cremoso com leite e açúcar."
+}
+
+###
+
+# Deletar uma receita própria
+DELETE http://localhost:3003/recipe/8b666941-6286-4d55-b784-934d220d5552
+Content-Type: application/json
+Authorization: {{token}}
+
+###
+
+# Deletar um usuário
+DELETE http://localhost:3003/user/688a5c20-173c-4015-83f2-17cafee6744a
+Content-Type: application/json
+Authorization: {{token}}
+
