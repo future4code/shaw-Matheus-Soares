@@ -13,7 +13,22 @@ export class UserBusiness {
       private hashManager: HashGenerator,
       private userDataBase: UserDatabase,
       private tokenGenerator: TokenGenerator
-   ){}
+   ) { }
+
+   public async getUserById(id: string) {
+      const user = await this.userDataBase.getUserById(id);
+
+      if (!user) {
+         throw new CustomError(404, "User not found");
+      }
+
+      return {
+         id: user.getId(),
+         name: user.getName(),
+         email: user.getEmail(),
+         role: user.getRole(),
+      };
+   }
 
    public async signup(
       name: string,
@@ -33,7 +48,7 @@ export class UserBusiness {
          if (password.length < 6) {
             throw new CustomError(422, "Invalid password");
          }
-         
+
          const id = this.idGenerator.generate()
 
          const cypherPassword = await this.hashManager.hash(password)
@@ -42,12 +57,12 @@ export class UserBusiness {
             new User(id, name, email, cypherPassword, stringToUserRole(role))
          );
 
-         const accessToken =  this.tokenGenerator.generate({
+         const accessToken = this.tokenGenerator.generate({
             id,
             role,
          });
          return { accessToken };
-      } catch (error: any) {
+      } catch (error) {
          if (error.message.includes("key 'email'")) {
             throw new CustomError(409, "Email already in use")
          }
@@ -85,7 +100,7 @@ export class UserBusiness {
          });
 
          return { accessToken };
-      } catch (error: any) {
+      } catch (error) {
          throw new CustomError(error.statusCode, error.message)
       }
    }

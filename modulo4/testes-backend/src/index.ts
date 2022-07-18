@@ -7,7 +7,7 @@ const app = express();
 
 app.use(express.json());
 
-// app.use("/users", userRouter);
+app.use("/users", userRouter);
 
 const server = app.listen(3003, () => {
   if (server) {
@@ -17,3 +17,4 @@ const server = app.listen(3003, () => {
     console.error(`Falha ao rodar o servidor.`);
   }
 });
+
