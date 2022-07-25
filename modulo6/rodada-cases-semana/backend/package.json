@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "tsc && node ./build/index.js",
-    "dev": "ts-node-dev ./src/index",
+    "dev": "ts-node-dev ./src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -21,6 +21,7 @@
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "knex": "^2.1.0",
+    "mysql": "^2.18.1",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

@@ -1,5 +1,8 @@
 import * as jwt from "jsonwebtoken";
-import { AuthenticationData } from "../model/AuthenticationData";
+import { AuthenticationData } from "../types/AuthenticationData";
+import { config } from "dotenv";
+
+config()
 
 export class Authenticator {
 
@@ -18,8 +21,7 @@ export class Authenticator {
             const data = jwt.verify(token, process.env.JWT_KEY as string) as AuthenticationData;
 
             return {
-                id: data.id,
-                role: data.role
+                id: data.id//id do user loggado
             };
 
         } catch (error) {

@@ -1,4 +1,7 @@
 import { genSalt, hash, compare } from "bcryptjs"
+import { config } from "dotenv"
+
+config()
 
 export class HashManage {
     
