@@ -22,8 +22,9 @@ export class ListController {
             }
 
             const result = await this.listBusiness.createList(listName, user.id)
+            // console.log(result)
 
-            res.status(201).send({ message: `List created successfully. key: ${result.getId}, name: ${result.getName}`})
+            res.status(201).send({ message: `List created successfully. key: ${result.getId()}, name: ${result.getName()}`})
         } catch (error: any) {
             res.status(error.statusCode || 500).send({ message: error.message })
         }

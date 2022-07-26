@@ -1,5 +1,5 @@
 import { List } from "../model/List";
-import { BaseDatabase } from "./BaseDatabase";
+import { BaseDatabase } from './BaseDataBase';
 
 export class ListDatabase extends BaseDatabase {
     private static TABLE_PERMISSION = "permissao"
@@ -48,17 +48,35 @@ export class ListDatabase extends BaseDatabase {
         }
     }
 
-    getListNameById = async (listId: string[]) => {
+    getListNameById = async (listId: any[]) => {
         try {
-            console.log('entrou na getListNameById')
-            const result = await BaseDatabase.connection()
-                .select("nome_da_lista")
-                .from(ListDatabase.TABLE_LIST)
-                .where({ id: listId })
+            // const savedQuery: any = []
+            // // console.log('entrou na getListNameById', listId)
+            // listId.map(async (list) => {
+            //     // console.log(list.list_id)
+            //     const query = await BaseDatabase.connection()
+            //         .select("nome_da_lista")
+            //         .from(ListDatabase.TABLE_LIST)
+            //         .where({ id: list.list_id })
 
-                console.log(result)
-            return result
+            //         // console.log('query', query[0].nome_da_lista)
+            //         savedQuery.push(query[0].nome_da_lista)
+            //         // savedQuery = [...savedQuery, query]
+            //     })
+            //     console.log(savedQuery)
+            //     return savedQuery
 
+
+
+            const query: any = await BaseDatabase.connection()
+                    .select("nome_da_lista")
+                    .from(ListDatabase.TABLE_LIST)
+                    .where({ id: listId })
+
+                    // console.log('query', query[0].nome_da_lista)
+
+                return query[0].nome_da_lista
+                
         } catch (error: any) {
             throw new Error(error.sqlMessage || error.message)
         }

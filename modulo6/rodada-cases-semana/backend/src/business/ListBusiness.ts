@@ -7,29 +7,33 @@ import { NotFoundError } from "./errors/NotFoundError"
 
 export class ListBusiness {
 
-    constructor (
+    constructor(
         private listDatabase: ListDatabase
-    ){}
-    
+    ) { }
+
     createList = async (name: string, userId: string) => {
         try {
-            
-            if(!name) {
+
+            if (!name) {
                 throw new InvalidInputError("Invalid input. List name is required")
             }
             // console.log(userId)
-            const listId: string[] = await this.listDatabase.getListByUserId(userId)//this returns a string of arrays
-            console.log(listId)
-            if(listId){
-                const registeredList = await this.listDatabase.getListNameById(listId)//this sends a string of arrays and receive another
-                for(var i: number = -1; i<registeredList.length; i++){
-                    console.log('entrou no for')
-                        if(registeredList[i] === name) {
-                            throw new NotFoundError("List name already being used")
-                        }
+            const listId: any[] = await this.listDatabase.getListByUserId(userId)
+            // console.log(listId)
+            if (listId) {
+                for (const list of listId) {
+                    // console.log(list.list_id)
+                    const registeredList = await this.listDatabase.getListNameById(list.list_id)
+                    console.log(registeredList)
+                    if (registeredList === name) {
+                        throw new CustomError(500, "List name already being used")
                     }
+                }
+                // for (var i: number = -1; i < registeredList.length; i++) {
+                    // console.log(registeredList, 'registeredList')
+                // }
             }
-            
+
             const newListId = IdGenerator.idGenerator()
             const newList = new List(newListId, name)
 

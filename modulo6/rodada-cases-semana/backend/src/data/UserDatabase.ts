@@ -1,5 +1,5 @@
 import { User } from "../model/User";
-import { BaseDatabase } from "./BaseDatabase";
+import { BaseDatabase } from "./BaseDataBase";
 
 export class UserDatabase extends BaseDatabase{
     private static TABLE_USER = "usuario"

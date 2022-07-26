@@ -1,5 +1,10 @@
 import styled from 'styled-components'
 import { Button } from '@mui/material'
+import TextField from '@mui/material/TextField';
+
+export const InputMaterial = styled(TextField)`
+    width: 100%;
+`
 
 export const Div = styled.div`
     padding: 10px;
@@ -23,4 +28,10 @@ export const Buttonstyled = styled(Button)`
         width: 100%;
         background-color: #E8222E;
     }
+`
+
+export const DivPassword = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 `
