@@ -17,21 +17,14 @@ export class ListBusiness {
             if (!name) {
                 throw new InvalidInputError("Invalid input. List name is required")
             }
-            // console.log(userId)
             const listId: any[] = await this.listDatabase.getListByUserId(userId)
-            // console.log(listId)
             if (listId) {
                 for (const list of listId) {
-                    // console.log(list.list_id)
                     const registeredList = await this.listDatabase.getListNameById(list.list_id)
-                    console.log(registeredList)
                     if (registeredList === name) {
                         throw new CustomError(500, "List name already being used")
                     }
                 }
-                // for (var i: number = -1; i < registeredList.length; i++) {
-                    // console.log(registeredList, 'registeredList')
-                // }
             }
 
             const newListId = IdGenerator.idGenerator()
@@ -50,9 +43,13 @@ export class ListBusiness {
     getAllListsById = async (userId: string) => {
         try {
 
-            const listId = await this.listDatabase.getListByUserId(userId)//map????&&push?????
-
-            const result = await this.listDatabase.getAllListsById(listId)
+            const temp = await this.listDatabase.getListByUserId(userId)
+            let listsId: string[] = []
+            for (let i = 0; i<temp.length; i++) {
+                listsId.push(temp[i].list_id)
+            }
+ 
+            const result = await this.listDatabase.getAllListsById(listsId)
 
             return result
         } catch (error: any) {

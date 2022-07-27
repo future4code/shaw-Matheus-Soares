@@ -4,7 +4,7 @@ export type LoginInputDTO = {
 }
 
 export type DataInputDTO = {
-    listId: string, 
     name: string,
-    participation: string
+    participation: number,
+    listId: string
 }

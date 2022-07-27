@@ -5,28 +5,32 @@ import { Authenticator } from "../services/Authenticator"
 import { DataInputDTO } from '../types/LoginInputDTO'
 
 
-export class ListController {
+export class DataController {
 
     constructor(
         private dataBusiness: DataBusiness
-    ){}
+    ) { }
 
     insertData = async (req: Request, res: Response) => {
         try {
-            const listId = String(req.params)
             const token = req.headers.authorization as string
-            const { firstName, lastName, participation } = req.body
-            const name = firstName + " " + lastName
-            const data: DataInputDTO = { listId, name, participation }
-            const user = Authenticator.getTokenData(token)
+            const { listId, firstName, lastName, participation } = req.body
 
-            if(!user) {
+            if (firstName.includes(" ") || lastName.includes(" ")) {
+                throw new CustomError(500, "First name and last name can't have spaces")
+            }
+
+            const name = firstName + " " + lastName
+            const data: DataInputDTO = { name, participation, listId }
+            const user = Authenticator.getTokenData(token)?.id
+
+            if (!user) {
                 throw new CustomError(404, "You must be logged in to perform this action")
             }
 
             await this.dataBusiness.insertData(data)
 
-            res.status(201).send({ message: "Data inserted successfully"})
+            res.status(201).send({ message: "Data inserted successfully" })
         } catch (error: any) {
             res.status(error.statusCode || 500).send({ message: error.message })
         }

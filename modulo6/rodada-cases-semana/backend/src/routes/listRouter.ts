@@ -12,3 +12,4 @@ const listController = new ListController(
 export const listRouter = express.Router()
 
 listRouter.post('/create/:listName', listController.createList)
+listRouter.get('/get', listController.getAllListsById)
