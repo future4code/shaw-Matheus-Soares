@@ -61,7 +61,7 @@ export class UserBusiness {
             throw new NotFoundError("Invalid credentials, email.")
         }
 
-        const isPasswordCorrect = HashManage.compare(password, userFromDB.getPassword())
+        const isPasswordCorrect: boolean = await HashManage.compare(password, userFromDB.getPassword())
         
         if(!isPasswordCorrect) {
             throw new NotFoundError("Invalid credentials: password")

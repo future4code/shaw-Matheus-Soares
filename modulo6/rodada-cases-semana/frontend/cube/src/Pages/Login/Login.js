@@ -1,14 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Div, Formu, Buttonstyled, DivPassword, InputMaterial } from './styled'
 import { IconButton } from '@mui/material'
 import Visibility from '@mui/icons-material/Visibility'
 import VisibilityOff from '@mui/icons-material/VisibilityOff'
+import axios from 'axios'
+import {BASE_URL} from '../../Constants/url'
 
 const Login = () => {
 
     const [ email, setEmail]=useState('')
     const [password, setPassword] = useState('')
     const [showPassword, setShowPassword] = useState(true)
+    const [ errEmail, setErrEmail] = useState('')
+    const [ errPass, setErrPass] = useState()
 
     const handleClickShowPassword = () => {
         setShowPassword(!showPassword)
@@ -17,7 +21,24 @@ const Login = () => {
     const onSubmitLogin = (event) => {
         event.preventDefault()
 
-        console.log(email, password)
+        const userLogin = {
+            email,
+            password
+        }
+
+        loginApi(userLogin)
+        console.log(userLogin)
+    }
+
+    const loginApi = async(body) => {
+        await axios
+            .post(`${ BASE_URL}/user/login`, body)
+            .then((res)=>{
+                console.log(res.data)
+            })
+            .catch((err)=>{
+                console.log(err.response)
+            })
     }
 
     return (

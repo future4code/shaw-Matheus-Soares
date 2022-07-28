@@ -11,4 +11,5 @@ const dataController = new DataController(
 
 export const dataRouter = express.Router()
 
-dataRouter.post('/data/create/:listName', dataController.insertData)
+dataRouter.post('/data/create', dataController.insertData)
+dataRouter.get('/data/get/:listId', dataController.getAllData)

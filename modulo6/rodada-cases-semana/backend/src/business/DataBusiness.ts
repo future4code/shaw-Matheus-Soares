@@ -18,6 +18,7 @@ export class DataBusiness {
             }
 
             const dataResult = await this.dataDatabase.getDataByListId(data.listId)
+            console.log('dataResult', dataResult)
 
             if (dataResult) {
                 const dataName = await this.dataDatabase.getDataNameByListId(data.listId)
@@ -30,11 +31,22 @@ export class DataBusiness {
                 }
             }
 
-            await this.dataDatabase.insertData(data)//esta inserindo em porcentagem diretamente, como faço pra inserir a hora e calcular a porcentagem alem de sempre atualizar a porcentagem
+            await this.dataDatabase.insertData(data)
 
         } catch (error: any) {
             throw new CustomError(500, error.sqlMessage || error.message)
         }
 
+    }
+
+    getAllData = async (listId: string) => {
+        try {
+            const dataResult = await this.dataDatabase.getDataByListId(listId)
+
+            return dataResult
+            
+        } catch (error: any) {
+            throw new CustomError(500, error.sqlMessage || error.message)
+        }
     }
 }
