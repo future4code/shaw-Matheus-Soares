@@ -1,3 +1,4 @@
+import { AtletaDataBase } from "../data/AtletaDataBase";
 import { CompeticaoDataBase } from "../data/CompeticaoDataBase";
 import IdGenerator from "../services/IdGenerator";
 import { Cadastro } from "../types/Cadrastro";
@@ -9,13 +10,17 @@ import { InvalidInputError } from "./errors/InvalidInputError";
 export class CompeticaoBusiness {
 
     constructor(
-        private competicaoDataBase: CompeticaoDataBase
+        private competicaoDataBase: CompeticaoDataBase,
+        private atletaDataBase: AtletaDataBase
     ) { }
 
     public registrar = async (dados: DadosCompeticao) => {
         try {
             if (!dados.competicao || !dados.unidade) {
                 throw new InvalidInputError("Invalid input. All inputs are required")
+            }
+            if(dados.unidade !== Role.metros && dados.unidade !== Role.segundos){
+                throw new InvalidInputError("Unidade must be 's' or 'm'.")
             }
             const competicao = dados.competicao
             const unidade = dados.unidade
@@ -50,8 +55,26 @@ export class CompeticaoBusiness {
         }
     }
 
-    public getWinner = async (resposta: boolean) => {
+    public getWinner = async (resposta: string, id: string) => {
         try {
+            const result = await this.atletaDataBase.getAtletaByCompeticaoId(id)
+            const tipo = await this.competicaoDataBase.getNameById(id)
+
+            if(resposta === 'FALSE') {
+                await this.competicaoDataBase.encerrarCompeticao(resposta, id)
+            }
+            
+            let primeiro, segundo, terceiro
+            if(tipo.unidade === Role.segundos) {
+                for(let i=0; i < result.length; i++) {
+                    
+                }
+            }
+            if(tipo.unidade === Role.metros) {
+                for(let i=0; i < result.length; i++) {
+                    
+                }
+            }
 
         } catch (error: any) {
             throw new CustomError(500, error.sqlMessage || error.message)

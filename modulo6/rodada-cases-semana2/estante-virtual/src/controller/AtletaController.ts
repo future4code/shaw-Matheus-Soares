@@ -10,8 +10,8 @@ export class AtletaController {
 
     public registrar = async (req: Request, res: Response) => {
         try {
-            const { competicaoId, nome, value1, value2, value3, unidade } = req.body
-            const dados: DadosAtleta = { competicaoId, nome, value1, value2, value3, unidade }
+            const { competicaoId, nome, value1, value2, value3 } = req.body
+            const dados: DadosAtleta = { competicaoId, nome, value1, value2, value3 }
 
             await this.atletaBusiness.registrar(dados)
 

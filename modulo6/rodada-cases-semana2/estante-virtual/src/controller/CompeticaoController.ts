@@ -45,9 +45,9 @@ export class CompeticaoController {
 
     public getWinner = async (req: Request, res: Response) => {
         try {
-            const resposta = req.params
+            const { definitivo, id } = req.body
 
-            const result = await this.competicaoBusiness
+            const result = await this.competicaoBusiness.getWinner(definitivo, id)
 
             res.status(201).send({ message: `${result}`})
         } catch (error: any) {

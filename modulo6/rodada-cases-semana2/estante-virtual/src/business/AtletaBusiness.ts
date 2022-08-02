@@ -1,4 +1,5 @@
 import { AtletaDataBase } from "../data/AtletaDataBase"
+import { CompeticaoDataBase } from "../data/CompeticaoDataBase"
 import { DadosAtleta } from "../types/DadosAtleta"
 import { Role } from "../types/Role"
 import { TipoAtleta } from "../types/TipoAtleta"
@@ -8,19 +9,30 @@ import { InvalidInputError } from "./errors/InvalidInputError"
 export class AtletaBusiness {
 
     constructor(
-        private atletaDataBase: AtletaDataBase
+        private atletaDataBase: AtletaDataBase,
+        private competicaoDataBase : CompeticaoDataBase
     ) { }
 
     registrar = async (dados: DadosAtleta) => {
         try {
-            if (!dados.competicaoId || !dados.nome || !dados.value1 || !dados.value2 || !dados.value3 || !dados.unidade) {
+            if (!dados.competicaoId || !dados.nome || !dados.value1 || !dados.value2 || !dados.value3 ) {
                 throw new InvalidInputError("Invalid input. All inputs are required")
             }
             let value
-            const competicaoId = dados.competicaoId
-            const nome = dados.nome
+            const competicaoId: string = dados.competicaoId
+            const nome: string = dados.nome
+            console.log(competicaoId)
+            const result = await this.competicaoDataBase.getNameById(competicaoId)
+            const registeredAtlete = await this.atletaDataBase.getAll(nome)
 
-            if (dados.unidade === Role.metros) {
+            if(result.boolean === 'FALSE'){
+                throw new CustomError(500, "Essa competiçao ja foi encerrada")
+            }
+            if(registeredAtlete){
+                throw new CustomError(500, "There's alreary a atlete registered with that name.")
+            }
+
+            if (result.unidade === Role.metros) {
                 value = dados.value1
                 if (value < dados.value2) {
                     value = dados.value2
@@ -31,7 +43,7 @@ export class AtletaBusiness {
                 const data: TipoAtleta = { competicaoId, nome, value }
                 return await this.atletaDataBase.registrar(data)
             }
-            else if(dados.unidade === Role.segundos) {
+            if(result.unidade === Role.segundos) {
                 value = dados.value1
                 if(value > dados.value2) {
                     value = dados.value2
@@ -40,9 +52,8 @@ export class AtletaBusiness {
                     value = dados.value3
                 }
                 const data: TipoAtleta = { competicaoId, nome, value }
+
                 return await this.atletaDataBase.registrar(data)
-            } else {
-                throw new CustomError(500, "unidade must be 's' or 'm'.")
             }
 
         } catch (error: any) {

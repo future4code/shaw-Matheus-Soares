@@ -18,16 +18,26 @@ Content-Type: application/json
     "id": "5721b389-4e6e-44d1-ab40-ef3f54905dcf"
 }
 
+###pegar vencedor
+GET http://localhost:3003/competicao/getWinner
+Content-Type: application/json
+
+{
+    "id": "5721b389-4e6e-44d1-ab40-ef3f54905dcf",
+    "definitivo": "FALSE"
+}
+
 ###cadastrar atleta
 POST http://localhost:3003/atleta/cadastro
 Content-Type: application/json
 
 {
     "competicaoId": "5721b389-4e6e-44d1-ab40-ef3f54905dcf",
-    "nome": "matheus moraes soares",
+    "nome": "joao almeida",
     "value1": 12.3,
     "value2": 12.4,
-    "value3": 11.9,
+    "value3": 13.1,
     "unidade": "s"
 }
 
+###

@@ -33,10 +33,26 @@ export class CompeticaoDataBase extends BaseDataBase {
 
     getNameById = async (id: string) => {
         try {
-            return await BaseDataBase.connection
+            const result = await BaseDataBase.connection
                 .select("*")
                 .from(tableName)
-                .where(id)
+                .where({id})
+            
+            return result[0]
+        } catch (error: any) {
+            throw new Error( error.mysqlMessage || error.message )
+        }
+    }
+
+    encerrarCompeticao = async (boolean: string, id: string) => {
+        try {
+            console.log('entrou')
+            await BaseDataBase.connection
+                .update({boolean})
+                .into(tableName)
+                .where({id})
+
+            console.log('terminou')
         } catch (error: any) {
             throw new Error( error.mysqlMessage || error.message )
         }
