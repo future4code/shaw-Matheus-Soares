@@ -64,16 +64,24 @@ export class CompeticaoBusiness {
                 await this.competicaoDataBase.encerrarCompeticao(resposta, id)
             }
             
-            let primeiro, segundo, terceiro
+
             if(tipo.unidade === Role.segundos) {
-                for(let i=0; i < result.length; i++) {
-                    
-                }
+                
+                result.sort(function (a: any, b: any) {
+                    return a.value < b.value ? -1 : a.value > b.value ? 1 : 0
+                })
+                const vencedores = [result[0], result[1], result[2]]
+                
+                return vencedores
             }
             if(tipo.unidade === Role.metros) {
-                for(let i=0; i < result.length; i++) {
-                    
-                }
+                
+                result.sort(function (a: any, b: any) {
+                    return a.value > b.value ? -1 : a.value < b.value ? 1 : 0
+                })
+                const vencedores = [result[0], result[1], result[2]]
+                
+                return vencedores
             }
 
         } catch (error: any) {
