@@ -32,10 +32,10 @@ export class CompeticaoController {
         }
     }
 
-    public getNameById = async (req: Request, res: Response) => {
+    public getById = async (req: Request, res: Response) => {
         try {
             const id = req.body
-            const result = await this.competicaoBusiness.getNameById(id)
+            const result = await this.competicaoBusiness.getById(id)
 
             res.status(201).send({ message: result })
 

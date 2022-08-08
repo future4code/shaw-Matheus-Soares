@@ -9,8 +9,13 @@ export class CompeticaoDataBaseMock {
         return []
     }
 
-    public getNameById = async () => {
-
+    public getById = async (id: string) => {
+        switch (id) {
+            case "5721b389-4e6e-44d1-ab40-ef3f54905dcf":
+                return "certo"
+            default: 
+                return undefined
+        }
     }
 
     public encerrarCompeticao = async () => {

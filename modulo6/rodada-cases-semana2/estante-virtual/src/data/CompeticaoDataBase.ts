@@ -31,12 +31,12 @@ export class CompeticaoDataBase extends BaseDataBase {
         }
     }
 
-    getNameById = async (id: string) => {
+    getById = async (id: string) => {
         try {
             const result = await BaseDataBase.connection
                 .select("*")
                 .from(tableName)
-                .where({id})
+                .where(id)
             
             return result[0]
         } catch (error: any) {

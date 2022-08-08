@@ -1,7 +1,6 @@
 import { AtletaDataBase } from "../data/AtletaDataBase";
 import { CompeticaoDataBase } from "../data/CompeticaoDataBase";
 import IdGenerator from "../services/IdGenerator";
-import { Cadastro } from "../types/Cadrastro";
 import { DadosCompeticao } from "../types/Dados";
 import { Role } from "../types/Role";
 import { CustomError } from "./errors/CustomError";
@@ -46,9 +45,9 @@ export class CompeticaoBusiness {
         }
     }
 
-    public getNameById = async (id: string) => {
+    public getById = async (id: string) => {
         try {
-            const result = await this.competicaoDataBase.getNameById(id)
+            const result = await this.competicaoDataBase.getById(id)
             return result 
         } catch (error: any) {
             throw new CustomError(500, error.sqlMessage || error.message)
@@ -58,7 +57,7 @@ export class CompeticaoBusiness {
     public getWinner = async (resposta: string, id: string) => {
         try {
             const result = await this.atletaDataBase.getAtletaByCompeticaoId(id)
-            const tipo = await this.competicaoDataBase.getNameById(id)
+            const tipo = await this.competicaoDataBase.getById(id)
 
             if(resposta === 'FALSE') {
                 await this.competicaoDataBase.encerrarCompeticao(resposta, id)

@@ -15,5 +15,5 @@ export const competicaoRouter = express.Router()
 
 competicaoRouter.post('/cadastro', competicaoController.registrar)
 competicaoRouter.get('/get', competicaoController.getAll)
-competicaoRouter.get('/getName', competicaoController.getNameById)
+competicaoRouter.get('/getName', competicaoController.getById)
 competicaoRouter.get('/getWinner', competicaoController.getWinner)

@@ -22,7 +22,7 @@ export class AtletaBusiness {
             const competicaoId: string = dados.competicaoId
             const nome: string = dados.nome
             console.log(competicaoId)
-            const result = await this.competicaoDataBase.getNameById(competicaoId)
+            const result = await this.competicaoDataBase.getById(competicaoId)
             const registeredAtlete = await this.atletaDataBase.getAll(nome)
 
             if(result.boolean === 'FALSE'){
