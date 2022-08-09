@@ -47,6 +47,9 @@ export class CompeticaoBusiness {
 
     public getById = async (id: string) => {
         try {
+            if(!id){
+                throw new InvalidInputError("Id is required.")
+            }
             const result = await this.competicaoDataBase.getById(id)
             return result 
         } catch (error: any) {
