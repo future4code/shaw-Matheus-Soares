@@ -45,7 +45,7 @@ describe("testando a competicao signup", () => {
             expect.assertions(2)
         }
     })
-    
+
     test("deve retornar erro quando unidade é diferente de 's' ou 'm'.", async () => {
         try {
 
@@ -86,12 +86,12 @@ describe("testando a competicao signup", () => {
 
 describe("testando getById de competiçao", () => {
 
-    test ("retorna erro no caso de Id nao ser passada", async () => {
+    test("retorna erro no caso de Id nao ser passada", async () => {
         try {
             const id = ""
 
             const token = await competicaoBusinessMock.getById(id)
-            
+
         } catch (error: any) {
             expect(error.message).toEqual("Id is required.")
             expect(error.statusCode).toBe(500)
@@ -100,6 +100,7 @@ describe("testando getById de competiçao", () => {
         }
     })
     test("Sucesso ", async () => {
+        expect.assertions(1)
         try {
 
             const id = "5721b389-4e6e-44d1-ab40-ef3f54905dcf"
@@ -109,8 +110,6 @@ describe("testando getById de competiçao", () => {
 
         } catch (error: any) {
             console.log(error)
-        } finally {
-            expect.assertions(1)
         }
     })
 })
