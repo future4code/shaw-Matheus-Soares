@@ -5,7 +5,7 @@ const tableName = "competicao"
 
 export class CompeticaoDataBase extends BaseDataBase {
 
-    registrar = async (dados: DadosCompeticao, id: string) => {
+    registrar = async (dados: DadosCompeticao, id: string):Promise<any> => {
         try {
             await BaseDataBase.connection
                 .insert({
@@ -14,8 +14,7 @@ export class CompeticaoDataBase extends BaseDataBase {
                     unidade: dados.unidade
                 })
                 .into(tableName);
-
-            
+                
         } catch (error: any) {
             throw new Error( error.mysqlMessage || error.message )
         }
@@ -36,7 +35,7 @@ export class CompeticaoDataBase extends BaseDataBase {
             const result = await BaseDataBase.connection
                 .select("*")
                 .from(tableName)
-                .where(id)
+                .where({id})
             
             return result[0]
         } catch (error: any) {
@@ -44,16 +43,16 @@ export class CompeticaoDataBase extends BaseDataBase {
         }
     }
 
-    encerrarCompeticao = async (boolean: string, id: string) => {
+    encerrarCompeticao = async (boolean: string, id: string):Promise<any> => {
         try {
-            console.log('entrou')
+            console.log(boolean, id)
             await BaseDataBase.connection
-                .update({boolean})
+                .update('boolean', boolean)
                 .into(tableName)
-                .where({id})
+                .where('id', id)
 
-            console.log('terminou')
         } catch (error: any) {
+            console.log(error)
             throw new Error( error.mysqlMessage || error.message )
         }
     }
