@@ -1,0 +1,42 @@
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEwN2RkN2MyLTI3MWMtNGE1My1hMWFkLTIxOTQwMTkxM2ZjZCIsImlhdCI6MTY2MTQ1NTQwMywiZXhwIjoxNjYxNTQxODAzfQ.GsGsGRIhfZgTWxZtVnYKMzSigEWi5E67vipNWfL2-Dw
+### cadastrar usuario
+POST http://localhost:3003/user/signup
+Content-Type: application/json
+
+{
+    "name": "matheus",
+    "email": "matheus@gmail.com",
+    "cpf": "12345678910",
+    "password": "123456"
+}
+
+### login
+POST http://localhost:3003/user/login
+Content-Type: application/json
+
+{
+    "email": "matheus@gmail.com",
+    "password": "123456"
+}
+
+### cadastrar cartao
+POST http://localhost:3003/card/cadastrar
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+    "name": "matheus",
+    "number": "987465321987",
+    "expiration": "02/2026",
+    "cvv": 333
+}
+
+### realizar pagamento pelo cartao
+POST http://localhost:3003/payment/card
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+    "amount": 500.00,
+    "cardNumber": "987465321987"
+}
