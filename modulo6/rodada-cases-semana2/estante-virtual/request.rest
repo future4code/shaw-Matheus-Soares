@@ -47,5 +47,5 @@ GET https://estantevirtualmatheus.herokuapp.com/atleta/getAtletas
 Content-Type: application/json
 
 {
-    "id": "4a7bc8b7-a674-42c7-8401-70a938d60c67"
+    "id": "4a7bc8b7-a674-42"
 }
